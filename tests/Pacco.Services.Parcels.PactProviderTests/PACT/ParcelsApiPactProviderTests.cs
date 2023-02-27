@@ -33,7 +33,9 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
             Name = "Product",
             Size = Size.Huge,
             Variant = Variant.Weapon,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.Now,
+            Description = "Description",
+            OrderId = new Guid()
         };
         
         private readonly MongoDbFixture<ParcelDocument, Guid> _mongoDbFixture;
