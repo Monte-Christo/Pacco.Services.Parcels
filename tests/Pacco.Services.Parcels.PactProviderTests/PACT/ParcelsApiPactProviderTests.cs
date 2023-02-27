@@ -16,7 +16,7 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
         [Fact]
         public async Task Pact_Should_Be_Verified()
         {
-            await _mongoDbFixture.InsertAsync(Parcel);
+            await _mongoDbFixture.InsertAsync(_parcelDoc);
             
             await PactVerifier
                 .Create(_httpClient)
@@ -27,7 +27,7 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
 
         #region ARRANGE
 
-        private readonly ParcelDocument Parcel = new ParcelDocument
+        private readonly ParcelDocument _parcelDoc = new ParcelDocument
         {
             Id =  new Guid("c68a24ea-384a-4fdc-99ce-8c9a28feac64"),
             Name = "Product",
@@ -38,12 +38,12 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
         
         private readonly MongoDbFixture<ParcelDocument, Guid> _mongoDbFixture;
         private readonly HttpClient _httpClient;
-        private bool _disposed = false;
+        private bool _disposed;
 
         public ParcelsApiPactProviderTests()
         {
             _mongoDbFixture = new MongoDbFixture<ParcelDocument, Guid>("test-parcels-service", "parcels");
-            var testServer = new TestServer(Program.GetWebHostBuilder(new string[0]));
+            var testServer = new TestServer(Program.GetWebHostBuilder(Array.Empty<string>()));
             testServer.AllowSynchronousIO = true;
             _httpClient = testServer.CreateClient();
         }
