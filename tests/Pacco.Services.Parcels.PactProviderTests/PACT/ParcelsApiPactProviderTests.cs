@@ -1,12 +1,12 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.TestHost;
 using Pacco.Services.Parcels.Api;
 using Pacco.Services.Parcels.Core.Entities;
 using Pacco.Services.Parcels.Infrastructure.Mongo.Documents;
 using Pacco.Services.Parcels.PactProviderTests.Fixtures;
 using Pactify;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Pacco.Services.Parcels.PactProviderTests.PACT
@@ -43,8 +43,10 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
         public ParcelsApiPactProviderTests()
         {
             _mongoDbFixture = new MongoDbFixture<ParcelDocument, Guid>("test-parcels-service", "parcels");
-            var testServer = new TestServer(Program.GetWebHostBuilder(Array.Empty<string>()));
-            testServer.AllowSynchronousIO = true;
+            var testServer = new TestServer(Program.GetWebHostBuilder(Array.Empty<string>()))
+            {
+                AllowSynchronousIO = true
+            };
             _httpClient = testServer.CreateClient();
         }
 
