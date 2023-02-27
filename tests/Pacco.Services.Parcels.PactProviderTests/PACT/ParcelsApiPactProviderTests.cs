@@ -27,7 +27,7 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
 
         #region ARRANGE
 
-        private readonly ParcelDocument _parcelDoc = new ParcelDocument
+        private readonly ParcelDocument _parcelDoc = new()
         {
             Id =  new Guid("c68a24ea-384a-4fdc-99ce-8c9a28feac64"),
             Name = "Product",
