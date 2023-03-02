@@ -21,7 +21,7 @@ namespace Pacco.Services.Parcels.PactProviderTests.PACT
             await PactVerifier
                 .Create(_httpClient)
                 .Between("orders", "parcels")
-                .RetrievedFromFile(@"../../../../../../pacts")
+                .RetrievedViaHttp(@"http://localhost:9292/pacts/provider/parcels/consumer/orders/latest")
                 .VerifyAsync();
         }
 
